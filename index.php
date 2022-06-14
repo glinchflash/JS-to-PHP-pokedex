@@ -36,24 +36,71 @@ if (isset($_POST['SearchPokemon'])) {
     $evoLine = json_decode($chainFetch, true);
     //fetching the names of the evo line
     $baseForm = $evoLine['chain']['species']['name'];
-    $middleForm = $evoLine['chain']['evolves_to']['0']['species']['name'];
-    $endForm = $evoLine['chain']['evolves_to']['0']['evolves_to']['0']['species']['name'];
+    if (count($evoLine['chain']['evolves_to']) > 0) {
+        $middleForm = $evoLine['chain']['evolves_to']['0']['species']['name'];
+        if (count($evoLine['chain']['evolves_to']['0']['evolves_to']) > 0) {
+            $endForm = $evoLine['chain']['evolves_to']['0']['evolves_to']['0']['species']['name'];
+        } else $endForm = "";
+    } else $middleForm = "";
+
     // fetching the sprites
     $baseFormUrl = "https://pokeapi.co/api/v2/pokemon/$baseForm";
     $baseFormSpriteFetch = file_get_contents($baseFormUrl);
     $baseFormFetchReturn = json_decode($baseFormSpriteFetch, true);
     $baseFormSprite = $baseFormFetchReturn['sprites']['other']['home']['front_default'];
 
-    $middleFormUrl = "https://pokeapi.co/api/v2/pokemon/$middleForm";
-    $middleFormSpriteFetch = file_get_contents($middleFormUrl);
-    $middleFormFetchReturn = json_decode($middleFormSpriteFetch, true);
-    $middleFormSprite = $middleFormFetchReturn['sprites']['other']['home']['front_default'];
+    if ($middleForm) {
+        $middleFormUrl = "https://pokeapi.co/api/v2/pokemon/$middleForm";
+        $middleFormSpriteFetch = file_get_contents($middleFormUrl);
+        $middleFormFetchReturn = json_decode($middleFormSpriteFetch, true);
+        $middleFormSprite = $middleFormFetchReturn['sprites']['other']['home']['front_default'];
+        if ($endForm) {
+            $endFormUrl = "https://pokeapi.co/api/v2/pokemon/$endForm";
+            $endFormSpriteFetch = file_get_contents($endFormUrl);
+            $endFormFetchReturn = json_decode($endFormSpriteFetch, true);
+            $endFormSprite = $endFormFetchReturn['sprites']['other']['home']['front_default'];
+        }
+    }
 
-    $endFormUrl = "https://pokeapi.co/api/v2/pokemon/$endForm";
-    $endFormSpriteFetch = file_get_contents($endFormUrl);
-    $endFormFetchReturn = json_decode($endFormSpriteFetch, true);
-    $endFormSprite = $endFormFetchReturn['sprites']['other']['home']['front_default'];
+    //typing variables
+    $NormalType = 'normal';
+    $FireType = 'fire';
+    $WaterType = 'water';
+    $ElectricType = 'electric';
+    $GrassType = 'grass';
+    $IceType = 'ice';
+    $FightingType = 'fightin';
+    $PoisonType = 'poison';
+    $GroundType = 'ground';
+    $FlyingType = 'flying';
+    $PsychicType = 'psychic';
+    $BugType = 'bug';
+    $RockType = 'rock';
+    $GhostType = 'ghost';
+    $DragonType = 'dragon';
+    $DarkType = 'dark';
+    $SteelType = 'steel';
+    $FairyType = 'fairy';
 
+//    types hex colors
+//     $Normal = 'A8A77A';
+//     $Fire = 'EE8130';
+//     $Water = '6390F0';
+//     $Electric = 'F7D02C';
+//     $Grass = '7AC74C';
+//     $Ice = '96D9D6';
+//     $Fighting = 'C22E28';
+//     $Poison = 'A33EA1';
+//     $Ground = 'E2BF65';
+//     $Flying = 'A98FF3';
+//     $Psychic = 'F95587';
+//     $Bug = 'A6B91A';
+//     $Rock = 'B6A136';
+//     $Ghost = '735797';
+//     $Dragon = '6F35FC';
+//     $Dark = '705746';
+//     $Steel = 'B7B7CE';
+//     $Fairy = 'D685AD';
 }
 ?>
 <!DOCTYPE html>
@@ -172,26 +219,44 @@ if (isset($_POST['SearchPokemon'])) {
                 <div class="base"><img src=" <?php if (isset($_POST['SearchPokemon'])) {
                         echo $baseFormSprite;
                     } else
-                        echo "images/pokeball.png" ?>" alt="" >
+                        echo "images/pokeball.png" ?>" alt="">
                     <p><span id="base"><?php if (isset($_POST['SearchPokemon'])) {
-                        echo $baseForm;} ?>
+                                echo $baseForm;
+                            } ?>
                     </span></p>
                 </div>
                 <div class="middle">
                     <img src=" <?php if (isset($_POST['SearchPokemon'])) {
-                        echo $middleFormSprite;
+                        if ($middleForm) {
+                            echo $middleFormSprite;
+                        }else
+                            echo 'images/pokeball.png';
                     } else
-                        echo "images/pokeball.png" ?>" alt="" >
+                        echo 'images/pokeball.png' ?>" alt="">
                     <p><span id="middleEvo"><?php if (isset($_POST['SearchPokemon'])) {
-                                echo $middleForm;} ?></span></p>
+                                if ($middleForm) {
+                                    echo $middleForm;
+                                }
+                            }
+                            ?></span></p>
                 </div>
                 <div class="final">
                     <img src=" <?php if (isset($_POST['SearchPokemon'])) {
-                        echo $endFormSprite;
+                        if ($middleForm) {
+                            if ($endForm) {
+                                echo $endFormSprite;
+                            } else
+                                echo 'images/pokeball.png';
+                        }else echo 'images/pokeball.png';
                     } else
-                        echo "images/pokeball.png" ?>" alt="" >
+                        echo 'images/pokeball.png'?>" alt="">
                     <p><span id="finalEvo"><?php if (isset($_POST['SearchPokemon'])) {
-                                echo $endForm;} ?></span></p>
+                                if ($middleForm) {
+                                    if ($endForm) {
+                                        echo $endForm;
+                                    } else echo "";
+                                }
+                            } ?></span></p>
                 </div>
             </div>
         </div>
