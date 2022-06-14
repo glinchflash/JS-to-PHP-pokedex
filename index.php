@@ -1,8 +1,6 @@
 <?php
 
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,10 +17,10 @@
 </header>
 <div class="container">
     <h1><img src="images/pokedex.png" alt="title"></h1>
-    <form action ="index.php" method="post">
-        <label for="searchInput"></label>
-        <input id="searchInput" type="text" name="search" placeholder="Search a pokemon"/>
-        <input type="submit" value=">>">
+    <form id="pokemonSearch">
+        <button id="search" type="button">Search!</button>
+        <input id="searchInput" type="text"/>
+        <label for="searchInput">Search a Pokemon by Name or Id</label>
     </form>
     <div id="pokedex">
         <div class="basicInfo">
