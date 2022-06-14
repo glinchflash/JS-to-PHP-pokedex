@@ -22,7 +22,6 @@ You will be surprised how easy it is to pick a new  language, once you know your
 
 Take a deep breath, and remember: you can do this!
 
-![Timeline](youcandoit.jpg)
 
 ## Tips
 Here are a few functions you will need to help you on your way.
@@ -43,5 +42,13 @@ Another interesting read is https://phptherightway.com. This is not so much docu
 ### Progress
 - -[x] get vhost working succesfully
 - -[x] implement html from original pokedex
-- -[ ] re-write javascript to php
+- - [ ] re-write javascript to php
+  - -[x] fetch api with php
+  - -[x] display name with php
+  - -[x] display sprites with php
+  - -[x] display moves with php
+  - -[x] display typing with php
+  - -[x] display evolution line sprites with php
+  - -[x] display evolution line names with php
+  - -[ ] change background colors of sections with php (according to typing)
 ---
