@@ -57,4 +57,5 @@ Another interesting read is https://phptherightway.com. This is not so much docu
     - -[ ] eevee
     - -[ ] wurmple
     - - [x] ditto
+    - -[x] smeargle
 ---
