@@ -52,5 +52,8 @@ Another interesting read is https://phptherightway.com. This is not so much docu
     - -[x] make evolution line work with single/duo staged pokemon
 - - [x] display evolution line names with php
    -  -[x] make evo-Line names work with single/duo staged pokemon
-- -[ ] change background colors of sections with php (according to typing)
+- - [x] change background colors of sections with php (according to typing)
+- -[ ] make special evolutions work
+    - -[ ] eevee
+    - -[ ] wurmple
 ---
