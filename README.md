@@ -56,4 +56,5 @@ Another interesting read is https://phptherightway.com. This is not so much docu
 - -[ ] make special evolutions work
     - -[ ] eevee
     - -[ ] wurmple
+    - - [x] ditto
 ---

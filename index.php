@@ -21,11 +21,16 @@ if (isset($_POST['SearchPokemon'])) {
 
     $type = $pokemon['types']['0']['type']['name'];
 
-    $move1 = $pokemon['moves']['0']['move']['name'];
-    $move2 = $pokemon['moves']['1']['move']['name'];
-    $move3 = $pokemon['moves']['2']['move']['name'];
-    $move4 = $pokemon['moves']['3']['move']['name'];
-    $moves = array("$move1", "$move2", "$move3", "$move4");
+   if (count($pokemon['moves']) > 1 ){
+        $move1 = $pokemon['moves']['0']['move']['name'];
+        $move2 = $pokemon['moves']['1']['move']['name'];
+        $move3 = $pokemon['moves']['2']['move']['name'];
+        $move4 = $pokemon['moves']['3']['move']['name'];
+        $moves = array("$move1", "$move2", "$move3", "$move4");
+    } else if (count($pokemon['moves'])===1){
+       $moves = $pokemon['moves']['0']['move']['name'];
+   }
+
     //fetching the evolution line url
     $evolutionURL = $pokemon['species']['url'];
     $evoFetch = file_get_contents($evolutionURL);
@@ -63,25 +68,6 @@ if (isset($_POST['SearchPokemon'])) {
         }
     }
 
-//    types hex colors
-//     $Normal = 'A8A77A';
-//     $Fire = 'EE8130';
-//     $Water = '6390F0';
-//     $Electric = 'F7D02C';
-//     $Grass = '7AC74C';
-//     $Ice = '96D9D6';
-//     $Fighting = 'C22E28';
-//     $Poison = 'A33EA1';
-//     $Ground = 'E2BF65';
-//     $Flying = 'A98FF3';
-//     $Psychic = 'F95587';
-//     $Bug = 'A6B91A';
-//     $Rock = 'B6A136';
-//     $Ghost = '735797';
-//     $Dragon = '6F35FC';
-//     $Dark = '705746';
-//     $Steel = 'B7B7CE';
-//     $Fairy = 'D685AD';
 }
 ?>
 <!DOCTYPE html>
@@ -112,18 +98,18 @@ if (isset($_POST['SearchPokemon'])) {
                     <p><span><?php
                             if (isset($_POST['SearchPokemon'])) {
                                 echo $type;
-                                if ($type === "normal") {
+                                if ($type ==="normal") {
                                     echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #A8A77A ;
                                            } .basicInfo #sprites{
                                            background-color: #A8A77A;
-                                           }<  #evoSprites{
+                                           }  #evoSprites{
                                            background-color: #A8A77A ;
                                            } 
                                             #evolutions{
                                            background-color: #A8A77A;
-                                           }/style >";
+                                           }</style >";
                                 }else if ($type ==="fire"){
                                     echo "<style>
                                           .basicInfo  #type\/moves{
@@ -160,7 +146,7 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #7AC74C;
                                            }</style >";
-                                }else if ($type ==="electic"){
+                                }else if ($type ==="electric"){
                                     echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #F7D02C ;
@@ -349,10 +335,13 @@ if (isset($_POST['SearchPokemon'])) {
                             ?></span></p>
                 </div>
                 <div class="moves"><p>Known moves: </p>
-                    <p><span id="moves"><?php
-                            if (isset($_POST['SearchPokemon'])) {
-                                echo implode(", ", $moves);
-                            } ?></span></p>
+                    <p><span id="moves" ><?php
+                            if (isset($_POST['SearchPokemon'])){
+                                if (count($pokemon['moves'])>1){
+                                    echo implode(", " , $moves);
+                                }else echo $moves;
+                            }
+                            ?></span></p>
                 </div>
             </div>
             <div id="sprites">
