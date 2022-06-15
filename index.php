@@ -8,6 +8,8 @@ if (isset($_POST['SearchPokemon'])) {
     $pokemonFetch = file_get_contents($url);
     $pokemon = json_decode($pokemonFetch, true);
 
+    $pokeName = $pokemon['name'];
+    $pokeID = $pokemon['id'];
     $frontSprite = $pokemon['sprites']['front_default'];
     $backSprite = $pokemon['sprites']['back_default'];
     $frontSpriteShiny = $pokemon['sprites']['front_shiny'];
@@ -16,8 +18,7 @@ if (isset($_POST['SearchPokemon'])) {
     $backSpriteFemale = $pokemon['sprites']['back_female'];
     $frontFemaleShiny = $pokemon['sprites']['front_shiny_female'];
     $backFemaleShiny = $pokemon['sprites']['back_shiny_female'];
-    $pokeName = $pokemon['name'];
-    $pokeID = $pokemon['id'];
+
     $type = $pokemon['types']['0']['type']['name'];
 
     $move1 = $pokemon['moves']['0']['move']['name'];
@@ -61,26 +62,6 @@ if (isset($_POST['SearchPokemon'])) {
             $endFormSprite = $endFormFetchReturn['sprites']['other']['home']['front_default'];
         }
     }
-
-    //typing variables
-    $NormalType = 'normal';
-    $FireType = 'fire';
-    $WaterType = 'water';
-    $ElectricType = 'electric';
-    $GrassType = 'grass';
-    $IceType = 'ice';
-    $FightingType = 'fightin';
-    $PoisonType = 'poison';
-    $GroundType = 'ground';
-    $FlyingType = 'flying';
-    $PsychicType = 'psychic';
-    $BugType = 'bug';
-    $RockType = 'rock';
-    $GhostType = 'ghost';
-    $DragonType = 'dragon';
-    $DarkType = 'dark';
-    $SteelType = 'steel';
-    $FairyType = 'fairy';
 
 //    types hex colors
 //     $Normal = 'A8A77A';
@@ -131,6 +112,229 @@ if (isset($_POST['SearchPokemon'])) {
                     <p><span><?php
                             if (isset($_POST['SearchPokemon'])) {
                                 echo $type;
+                                if ($type === "normal") {
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #A8A77A ;
+                                           } .basicInfo #sprites{
+                                           background-color: #A8A77A;
+                                           }<  #evoSprites{
+                                           background-color: #A8A77A ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #A8A77A;
+                                           }/style >";
+                                }else if ($type ==="fire"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #EE8130 ;
+                                           } .basicInfo #sprites{
+                                           background-color: #EE8130;
+                                           }  #evoSprites{
+                                           background-color: #EE8130 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #EE8130;
+                                           }</style >";
+                                }else if ($type ==="water"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #6390F0 ;
+                                           } .basicInfo #sprites{
+                                           background-color: #6390F0;
+                                           }  #evoSprites{
+                                           background-color: #6390F0 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #6390F0;
+                                           }</style >";
+                                }else if ($type ==="grass"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #7AC74C ;
+                                           } .basicInfo #sprites{
+                                           background-color: #7AC74C;
+                                           }  #evoSprites{
+                                           background-color: #7AC74C ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #7AC74C;
+                                           }</style >";
+                                }else if ($type ==="electic"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #F7D02C ;
+                                           } .basicInfo #sprites{
+                                           background-color: #F7D02C;
+                                           }  #evoSprites{
+                                           background-color: #F7D02C ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #F7D02C;
+                                           }</style >";
+                                }else if ($type ==="ice"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #96D9D6 ;
+                                           } .basicInfo #sprites{
+                                           background-color: #96D9D6;
+                                           }  #evoSprites{
+                                           background-color: #96D9D6 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #96D9D6;
+                                           }</style >";
+                                }else if ($type ==="fighting"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #C22E28 ;
+                                           }.basicInfo #sprites{
+                                           background-color: #C22E28;
+                                           }  #evoSprites{
+                                           background-color: #C22E28 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #C22E28;
+                                           } </style >";
+                                }else if ($type ==="poison"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #A33EA1 ;
+                                           } .basicInfo #sprites{
+                                           background-color: #A33EA1;
+                                           }  #evoSprites{
+                                           background-color: #A33EA1 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #A33EA1;
+                                           }</style >";
+                                }else if ($type ==="ground"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #E2BF65 ;
+                                           } .basicInfo #sprites{
+                                           background-color: #E2BF65;
+                                           }  #evoSprites{
+                                           background-color: #E2BF65 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #E2BF65;
+                                           }</style >";
+                                }else if ($type ==="flying"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #A98FF3 ;
+                                           } .basicInfo #sprites{
+                                           background-color: #A98FF3;
+                                           }  #evoSprites{
+                                           background-color: #A98FF3 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #A98FF3;
+                                           }</style >";
+                                }else if ($type ==="psychic"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #F95587 ;
+                                           } .basicInfo #sprites{
+                                           background-color: #F95587;
+                                           }  #evoSprites{
+                                           background-color: #F95587 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #F95587;
+                                           }</style >";
+                                }else if ($type ==="bug"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #A6B91A ;
+                                           } .basicInfo #sprites{
+                                           background-color: #A6B91A;
+                                           }  #evoSprites{
+                                           background-color: #A6B91A ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #A6B91A;
+                                           }</style >";
+                                }else if ($type ==="rock"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #B6A136 ;
+                                           } .basicInfo #sprites{
+                                           background-color: #B6A136;
+                                           }  #evoSprites{
+                                           background-color: #B6A136 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #B6A136;
+                                           }</style >";
+                                }else if ($type ==="ghost"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #735797 ;
+                                           } .basicInfo #sprites{
+                                           background-color: #735797;
+                                           }  #evoSprites{
+                                           background-color: #735797 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #735797;
+                                           }</style >";
+                                }else if ($type ==="dragon"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #6F35FC ;
+                                           }.basicInfo #sprites{
+                                           background-color: #6F35FC;
+                                           }  #evoSprites{
+                                           background-color: #6F35FC ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #6F35FC;
+                                           } </style >";
+                                }else if ($type ==="dark"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #705746 ;
+                                           } 
+                                           .basicInfo #sprites{
+                                           background-color: #705746;
+                                           }  #evoSprites{
+                                           background-color: #705746 ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #705746;
+                                           }</style >";
+                                }else if ($type ==="steel"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #B7B7CE ;
+                                           } 
+                                           .basicInfo #sprites{
+                                           background-color: #B7B7CE;
+                                           }  #evoSprites{
+                                           background-color: #B7B7CE ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #B7B7CE;
+                                           }
+                                           </style >";
+                                }else if ($type ==="fairy"){
+                                    echo "<style>
+                                          .basicInfo  #type\/moves{
+                                           background-color: #D685AD ;
+                                           } 
+                                           .basicInfo #sprites{
+                                           background-color: #D685AD;
+                                           }
+                                             #evoSprites{
+                                           background-color: #D685AD ;
+                                           } 
+                                            #evolutions{
+                                           background-color: #D685AD;
+                                           }
+                                          </style >";
+                                }
                             } ?></span></p>
                     <p><span><?php
                             if (isset($_POST['SearchPokemon'])) {
@@ -166,47 +370,63 @@ if (isset($_POST['SearchPokemon'])) {
                 <img src="
                 <?php
                 if (isset($_POST['SearchPokemon'])) {
-                    echo $frontSprite;
+                    if ($frontSprite) {
+                        echo $frontSprite;
+                    } else echo "images/pokeball.png";
                 } else
                     echo "images/pokeball.png" ?>" alt="" id="frontSprite">
 
                 <img src="
                 <?php
                 if (isset($_POST['SearchPokemon'])) {
-                    echo $backSprite;
+                    if ($backSprite) {
+                        echo $backSprite;
+                    } else echo "images/pokeball.png";
                 } else
                     echo "images/pokeball.png" ?>" alt="" id="backSprite">
 
                 <img src="
                 <?php
                 if (isset($_POST['SearchPokemon'])) {
-                    echo $frontSpriteShiny;
+                    if ($frontSpriteShiny) {
+                        echo $frontSpriteShiny;
+                    } else echo "images/pokeball.png";
                 } else
                     echo "images/pokeball.png" ?>" alt="" id="frontSpriteShiny">
 
                 <img src="<?php if (isset($_POST['SearchPokemon'])) {
-                    echo $backSpriteShiny;
+                    if ($backSpriteShiny) {
+                        echo $backSpriteShiny;
+                    } else echo "images/pokeball.png";
                 } else
                     echo "images/pokeball.png" ?>" alt="" id="backSpriteShiny">
                 <p>Female &#9792;</p>
 
                 <img src="<?php if (isset($_POST['SearchPokemon'])) {
-                    echo $frontSpriteFemale;
+                    if ($frontFemaleShiny) {
+                        echo $frontSpriteFemale;
+                    } else echo "images/pokeball.png";
                 } else
                     echo "images/pokeball.png" ?>" alt="" id="frontSpriteFemale">
 
                 <img src="<?php if (isset($_POST['SearchPokemon'])) {
-                    echo $backSpriteFemale;
+                    if ($backSpriteFemale) {
+                        echo $backSpriteFemale;
+                    } else echo "images/pokeball.png";
                 } else
                     echo "images/pokeball.png" ?>" alt="" id="backSpriteFemale">
 
                 <img src="<?php if (isset($_POST['SearchPokemon'])) {
-                    echo $frontFemaleShiny;
+                    if ($frontFemaleShiny) {
+                        echo $frontFemaleShiny;
+                    } else echo "images/pokeball.png";
                 } else
                     echo "images/pokeball.png" ?>" alt="" id="frontSpriteShinyFemale">
 
                 <img src="<?php if (isset($_POST['SearchPokemon'])) {
-                    echo $backSpriteFemale;
+                    if ($backSpriteFemale) {
+                        echo $backSpriteFemale;
+                    } else echo "images/pokeball.png";
                 } else
                     echo "images/pokeball.png" ?>" alt="" id="backSpriteShinyFemale">
 
@@ -229,7 +449,7 @@ if (isset($_POST['SearchPokemon'])) {
                     <img src=" <?php if (isset($_POST['SearchPokemon'])) {
                         if ($middleForm) {
                             echo $middleFormSprite;
-                        }else
+                        } else
                             echo 'images/pokeball.png';
                     } else
                         echo 'images/pokeball.png' ?>" alt="">
@@ -247,9 +467,9 @@ if (isset($_POST['SearchPokemon'])) {
                                 echo $endFormSprite;
                             } else
                                 echo 'images/pokeball.png';
-                        }else echo 'images/pokeball.png';
+                        } else echo 'images/pokeball.png';
                     } else
-                        echo 'images/pokeball.png'?>" alt="">
+                        echo 'images/pokeball.png' ?>" alt="">
                     <p><span id="finalEvo"><?php if (isset($_POST['SearchPokemon'])) {
                                 if ($middleForm) {
                                     if ($endForm) {
