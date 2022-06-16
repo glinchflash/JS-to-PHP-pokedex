@@ -1,4 +1,4 @@
-# Title: The pokemon challenge - PHP style
+# JS-to-PHP-pokedex
 
 - Repository: `challenge-pokemon-php`
 - Type of Challenge: `Learning`
