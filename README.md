@@ -53,6 +53,7 @@ Another interesting read is https://phptherightway.com. This is not so much docu
 - - [x] display evolution line names with php
    -  -[x] make evo-Line names work with single/duo staged pokemon
 - - [x] change background colors of sections with php (according to typing)
+- - [x] show ability
 - -[x] make special evolutions work
     - -[x] eevee
     - -[x] wurmple

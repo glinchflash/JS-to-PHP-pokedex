@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_POST['SearchPokemon'])) {
     $input = $_POST['searchInput'];
     if ($input === 'darmanitan' || $input === 555){
@@ -15,6 +16,7 @@ if (isset($_POST['SearchPokemon'])) {
         $pokeName = "darmanitan";
     }else $pokeName = $pokemon['name'];
 
+    $pokeAbility = $pokemon['abilities']['0']['ability']['name'];
     $pokeID = $pokemon['id'];
     $frontSprite = $pokemon['sprites']['front_default'];
     $backSprite = $pokemon['sprites']['back_default'];
@@ -412,7 +414,8 @@ if (isset($_POST['SearchPokemon'])) {
                                           </style >";
                                         break;
                                 }
-                            } ?></span></p>
+                            }
+                            ?></span></p>
                     <p><span><?php
                             if (isset($_POST['SearchPokemon'])) {
                                 if (count($pokemon['types']) > 1) {
@@ -424,6 +427,13 @@ if (isset($_POST['SearchPokemon'])) {
                                 }
                             }
                             ?></span></p>
+                    <p><span>Ability:
+                            <?php
+                            if (isset($_POST['SearchPokemon'])) {
+                                echo $pokeAbility;
+                            }
+                            ?>
+                        </span></p>
                 </div>
                 <div class="moves"><p>Known moves: </p>
                     <p><span id="moves"><?php
