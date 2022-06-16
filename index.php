@@ -45,7 +45,22 @@ if (isset($_POST['SearchPokemon'])) {
     if (count($evoLine['chain']['evolves_to']) > 0) {
         $middleForm = $evoLine['chain']['evolves_to']['0']['species']['name'];
         if (count($evoLine['chain']['evolves_to']) > 1) {
-            $middleForm2 = $evoLine['chain']['evolves_to']['1']['species']['name'];
+           $middleForm2 = $evoLine['chain']['evolves_to']['1']['species']['name'];
+            if (count($evoLine['chain']['evolves_to']) > 7){
+                $middleForm3 = $evoLine['chain']['evolves_to']['2']['species']['name'];
+                $middleForm4 = $evoLine['chain']['evolves_to']['3']['species']['name'];
+                $middleForm5 = $evoLine['chain']['evolves_to']['4']['species']['name'];
+                $middleForm6 = $evoLine['chain']['evolves_to']['5']['species']['name'];
+                $middleForm7 = $evoLine['chain']['evolves_to']['6']['species']['name'];
+                $middleForm8 = $evoLine['chain']['evolves_to']['7']['species']['name'];
+            }else {
+                $middleForm3 = "";
+                $middleForm4 = "";
+                $middleForm5 = "";
+                $middleForm6 = "";
+                $middleForm7 = "";
+                $middleForm8 = "";
+            }
         } else $middleForm2 = "";
         if (count($evoLine['chain']['evolves_to']['0']['evolves_to']) > 0) {
             $endForm = $evoLine['chain']['evolves_to']['0']['evolves_to']['0']['species']['name'];
@@ -71,6 +86,37 @@ if (isset($_POST['SearchPokemon'])) {
             $middleForm2SpriteFetch = file_get_contents($middleForm2Url);
             $middleForm2FetchReturn = json_decode($middleForm2SpriteFetch, true);
             $middleForm2Sprite = $middleForm2FetchReturn['sprites']['other']['home']['front_default'];
+            if ($middleForm3){
+                $middleForm3Url = "https://pokeapi.co/api/v2/pokemon/$middleForm3";
+                $middleForm3SpriteFetch = file_get_contents($middleForm3Url);
+                $middleForm3FetchReturn = json_decode($middleForm3SpriteFetch, true);
+                $middleForm3Sprite = $middleForm3FetchReturn['sprites']['other']['home']['front_default'];
+
+                $middleForm4Url = "https://pokeapi.co/api/v2/pokemon/$middleForm4";
+                $middleForm4SpriteFetch = file_get_contents($middleForm4Url);
+                $middleForm4FetchReturn = json_decode($middleForm4SpriteFetch, true);;
+                $middleForm4Sprite = $middleForm4FetchReturn['sprites']['other']['home']['front_default'];
+
+                $middleForm5Url = "https://pokeapi.co/api/v2/pokemon/$middleForm5";
+                $middleForm5SpriteFetch = file_get_contents($middleForm5Url);
+                $middleForm5FetchReturn = json_decode($middleForm5SpriteFetch, true);
+                $middleForm5Sprite = $middleForm5FetchReturn['sprites']['other']['home']['front_default'];
+
+                $middleForm6Url = "https://pokeapi.co/api/v2/pokemon/$middleForm6";
+                $middleForm6SpriteFetch = file_get_contents($middleForm6Url);
+                $middleForm6FetchReturn = json_decode($middleForm6SpriteFetch, true);
+                $middleForm6Sprite = $middleForm6FetchReturn['sprites']['other']['home']['front_default'];
+
+                $middleForm7Url = "https://pokeapi.co/api/v2/pokemon/$middleForm7";
+                $middleForm7SpriteFetch = file_get_contents($middleForm7Url);
+                $middleForm7FetchReturn = json_decode($middleForm7SpriteFetch, true);
+                $middleForm7Sprite = $middleForm7FetchReturn['sprites']['other']['home']['front_default'];
+
+                $middleForm8Url = "https://pokeapi.co/api/v2/pokemon/$middleForm8";
+                $middleForm8SpriteFetch = file_get_contents($middleForm8Url);
+                $middleForm8FetchReturn = json_decode($middleForm8SpriteFetch, true);
+                $middleForm8Sprite = $middleForm8FetchReturn['sprites']['other']['home']['front_default'];
+            }
         }
         if ($endForm) {
             $endFormUrl = "https://pokeapi.co/api/v2/pokemon/$endForm";
@@ -494,6 +540,56 @@ if (isset($_POST['SearchPokemon'])) {
                                 $dom->appendChild($img);
                                 echo $dom->saveXML($img);
                                 echo $middleForm2;
+                                if ($middleForm3){
+                                    $dom = new DOMDocument('1.0', 'utf-8');
+                                    $img = $dom->createElement('img');
+                                    $src = $dom->createAttribute('src');
+                                    $src->value = $middleForm3Sprite;
+                                    $img->appendChild($src);
+                                    $dom->appendChild($img);
+                                    echo $dom->saveXML($img);
+                                    echo $middleForm3;
+                                    $dom = new DOMDocument('1.0', 'utf-8');
+                                    $img = $dom->createElement('img');
+                                    $src = $dom->createAttribute('src');
+                                    $src->value = $middleForm4Sprite;
+                                    $img->appendChild($src);
+                                    $dom->appendChild($img);
+                                    echo $dom->saveXML($img);
+                                    echo $middleForm4;
+                                    $dom = new DOMDocument('1.0', 'utf-8');
+                                    $img = $dom->createElement('img');
+                                    $src = $dom->createAttribute('src');
+                                    $src->value = $middleForm5Sprite;
+                                    $img->appendChild($src);
+                                    $dom->appendChild($img);
+                                    echo $dom->saveXML($img);
+                                    echo $middleForm5;
+                                    $dom = new DOMDocument('1.0', 'utf-8');
+                                    $img = $dom->createElement('img');
+                                    $src = $dom->createAttribute('src');
+                                    $src->value = $middleForm6Sprite;
+                                    $img->appendChild($src);
+                                    $dom->appendChild($img);
+                                    echo $dom->saveXML($img);
+                                    echo $middleForm6;
+                                    $dom = new DOMDocument('1.0', 'utf-8');
+                                    $img = $dom->createElement('img');
+                                    $src = $dom->createAttribute('src');
+                                    $src->value = $middleForm7Sprite;
+                                    $img->appendChild($src);
+                                    $dom->appendChild($img);
+                                    echo $dom->saveXML($img);
+                                    echo $middleForm7;
+                                    $dom = new DOMDocument('1.0', 'utf-8');
+                                    $img = $dom->createElement('img');
+                                    $src = $dom->createAttribute('src');
+                                    $src->value = $middleForm8Sprite;
+                                    $img->appendChild($src);
+                                    $dom->appendChild($img);
+                                    echo $dom->saveXML($img);
+                                    echo $middleForm8;
+                                }
                             }
                         }
                     } ?>
@@ -503,23 +599,23 @@ if (isset($_POST['SearchPokemon'])) {
                         if ($middleForm) {
                             if ($endForm) {
                                 echo $endFormSprite;
-                            }
+                            }else echo 'images/pokeball.png';
                         } else echo 'images/pokeball.png';
                     } else echo 'images/pokeball.png';
                     ?>" alt="">
                     <?php if (isset($_POST['SearchPokemon'])) {
                         if ($endForm) {
                             echo $endForm;
-                        }
-                        if ($endForm2) {
-                            $dom = new DOMDocument('1.0', 'utf-8');
-                            $img = $dom->createElement('img');
-                            $src = $dom->createAttribute('src');
-                            $src->value = $endForm2Sprite;
-                            $img->appendChild($src);
-                            $dom->appendChild($img);
-                            echo $dom->saveXML($img);
-                            echo $endForm2;
+                            if ($endForm2) {
+                                $dom = new DOMDocument('1.0', 'utf-8');
+                                $img = $dom->createElement('img');
+                                $src = $dom->createAttribute('src');
+                                $src->value = $endForm2Sprite;
+                                $img->appendChild($src);
+                                $dom->appendChild($img);
+                                echo $dom->saveXML($img);
+                                echo $endForm2;
+                            }
                         }
                     }
                     ?>
