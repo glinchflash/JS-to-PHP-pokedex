@@ -42,7 +42,7 @@ Another interesting read is https://phptherightway.com. This is not so much docu
 ### Progress
 - -[x] get vhost working succesfully
 - -[x] implement html from original pokedex
-- [ ] re-write javascript to php
+- [x] re-write javascript to php
 - -[x] fetch api with php
 - -[x] display name with php
 - -[x] display sprites with php
@@ -55,7 +55,7 @@ Another interesting read is https://phptherightway.com. This is not so much docu
 - - [x] change background colors of sections with php (according to typing)
 - -[ ] make special evolutions work
     - -[ ] eevee
-    - -[ ] wurmple
+    - -[x] wurmple
     - - [x] ditto
     - -[x] smeargle
 ---

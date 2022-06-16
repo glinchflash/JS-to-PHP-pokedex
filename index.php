@@ -21,15 +21,15 @@ if (isset($_POST['SearchPokemon'])) {
 
     $type = $pokemon['types']['0']['type']['name'];
 
-   if (count($pokemon['moves']) > 1 ){
+    if (count($pokemon['moves']) > 1) {
         $move1 = $pokemon['moves']['0']['move']['name'];
         $move2 = $pokemon['moves']['1']['move']['name'];
         $move3 = $pokemon['moves']['2']['move']['name'];
         $move4 = $pokemon['moves']['3']['move']['name'];
         $moves = array("$move1", "$move2", "$move3", "$move4");
-    } else if (count($pokemon['moves'])===1){
-       $moves = $pokemon['moves']['0']['move']['name'];
-   }
+    } else if (count($pokemon['moves']) === 1) {
+        $moves = $pokemon['moves']['0']['move']['name'];
+    }
 
     //fetching the evolution line url
     $evolutionURL = $pokemon['species']['url'];
@@ -44,8 +44,14 @@ if (isset($_POST['SearchPokemon'])) {
     $baseForm = $evoLine['chain']['species']['name'];
     if (count($evoLine['chain']['evolves_to']) > 0) {
         $middleForm = $evoLine['chain']['evolves_to']['0']['species']['name'];
+        if (count($evoLine['chain']['evolves_to']) > 1) {
+            $middleForm2 = $evoLine['chain']['evolves_to']['1']['species']['name'];
+        } else $middleForm2 = "";
         if (count($evoLine['chain']['evolves_to']['0']['evolves_to']) > 0) {
             $endForm = $evoLine['chain']['evolves_to']['0']['evolves_to']['0']['species']['name'];
+            if (count($evoLine['chain']['evolves_to']) > 1) {
+                $endForm2 = $evoLine['chain']['evolves_to']['1']['evolves_to']['0']['species']['name'];
+            } else $endForm2 = "";
         } else $endForm = "";
     } else $middleForm = "";
 
@@ -60,11 +66,23 @@ if (isset($_POST['SearchPokemon'])) {
         $middleFormSpriteFetch = file_get_contents($middleFormUrl);
         $middleFormFetchReturn = json_decode($middleFormSpriteFetch, true);
         $middleFormSprite = $middleFormFetchReturn['sprites']['other']['home']['front_default'];
+        if ($middleForm2) {
+            $middleForm2Url = "https://pokeapi.co/api/v2/pokemon/$middleForm2";
+            $middleForm2SpriteFetch = file_get_contents($middleForm2Url);
+            $middleForm2FetchReturn = json_decode($middleForm2SpriteFetch, true);
+            $middleForm2Sprite = $middleForm2FetchReturn['sprites']['other']['home']['front_default'];
+        }
         if ($endForm) {
             $endFormUrl = "https://pokeapi.co/api/v2/pokemon/$endForm";
             $endFormSpriteFetch = file_get_contents($endFormUrl);
             $endFormFetchReturn = json_decode($endFormSpriteFetch, true);
             $endFormSprite = $endFormFetchReturn['sprites']['other']['home']['front_default'];
+            if ($endForm2) {
+                $endForm2Url = "https://pokeapi.co/api/v2/pokemon/$endForm2";
+                $endForm2SpriteFetch = file_get_contents($endForm2Url);
+                $endForm2FetchReturn = json_decode($endForm2SpriteFetch, true);
+                $endForm2Sprite = $endForm2FetchReturn['sprites']['other']['home']['front_default'];
+            }
         }
     }
 
@@ -98,8 +116,9 @@ if (isset($_POST['SearchPokemon'])) {
                     <p><span><?php
                             if (isset($_POST['SearchPokemon'])) {
                                 echo $type;
-                                if ($type ==="normal") {
-                                    echo "<style>
+                                switch ($type) {
+                                    case 'normal':
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #A8A77A ;
                                            } .basicInfo #sprites{
@@ -110,8 +129,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #A8A77A;
                                            }</style >";
-                                }else if ($type ==="fire"){
-                                    echo "<style>
+                                        break;
+                                    case "fire" :
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #EE8130 ;
                                            } .basicInfo #sprites{
@@ -122,8 +142,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #EE8130;
                                            }</style >";
-                                }else if ($type ==="water"){
-                                    echo "<style>
+                                        break;
+                                    case "water" :
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #6390F0 ;
                                            } .basicInfo #sprites{
@@ -134,8 +155,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #6390F0;
                                            }</style >";
-                                }else if ($type ==="grass"){
-                                    echo "<style>
+                                        break;
+                                    case "grass":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #7AC74C ;
                                            } .basicInfo #sprites{
@@ -146,8 +168,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #7AC74C;
                                            }</style >";
-                                }else if ($type ==="electric"){
-                                    echo "<style>
+                                        break;
+                                    case "electric":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #F7D02C ;
                                            } .basicInfo #sprites{
@@ -158,8 +181,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #F7D02C;
                                            }</style >";
-                                }else if ($type ==="ice"){
-                                    echo "<style>
+                                        break;
+                                    case "ice":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #96D9D6 ;
                                            } .basicInfo #sprites{
@@ -170,8 +194,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #96D9D6;
                                            }</style >";
-                                }else if ($type ==="fighting"){
-                                    echo "<style>
+                                        break;
+                                    case "fighting":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #C22E28 ;
                                            }.basicInfo #sprites{
@@ -182,8 +207,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #C22E28;
                                            } </style >";
-                                }else if ($type ==="poison"){
-                                    echo "<style>
+                                        break;
+                                    case "poison":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #A33EA1 ;
                                            } .basicInfo #sprites{
@@ -194,8 +220,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #A33EA1;
                                            }</style >";
-                                }else if ($type ==="ground"){
-                                    echo "<style>
+                                        break;
+                                    case "ground":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #E2BF65 ;
                                            } .basicInfo #sprites{
@@ -206,8 +233,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #E2BF65;
                                            }</style >";
-                                }else if ($type ==="flying"){
-                                    echo "<style>
+                                        break;
+                                    case "flying":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #A98FF3 ;
                                            } .basicInfo #sprites{
@@ -218,8 +246,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #A98FF3;
                                            }</style >";
-                                }else if ($type ==="psychic"){
-                                    echo "<style>
+                                        break;
+                                    case "psychic":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #F95587 ;
                                            } .basicInfo #sprites{
@@ -230,8 +259,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #F95587;
                                            }</style >";
-                                }else if ($type ==="bug"){
-                                    echo "<style>
+                                        break;
+                                    case "bug":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #A6B91A ;
                                            } .basicInfo #sprites{
@@ -242,8 +272,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #A6B91A;
                                            }</style >";
-                                }else if ($type ==="rock"){
-                                    echo "<style>
+                                        break;
+                                    case "rock":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #B6A136 ;
                                            } .basicInfo #sprites{
@@ -254,8 +285,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #B6A136;
                                            }</style >";
-                                }else if ($type ==="ghost"){
-                                    echo "<style>
+                                        break;
+                                    case "ghost":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #735797 ;
                                            } .basicInfo #sprites{
@@ -266,8 +298,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #735797;
                                            }</style >";
-                                }else if ($type ==="dragon"){
-                                    echo "<style>
+                                        break;
+                                    case "dragon":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #6F35FC ;
                                            }.basicInfo #sprites{
@@ -278,8 +311,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #6F35FC;
                                            } </style >";
-                                }else if ($type ==="dark"){
-                                    echo "<style>
+                                        break;
+                                    case "dark":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #705746 ;
                                            } 
@@ -291,8 +325,9 @@ if (isset($_POST['SearchPokemon'])) {
                                             #evolutions{
                                            background-color: #705746;
                                            }</style >";
-                                }else if ($type ==="steel"){
-                                    echo "<style>
+                                        break;
+                                    case "steel":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #B7B7CE ;
                                            } 
@@ -305,8 +340,9 @@ if (isset($_POST['SearchPokemon'])) {
                                            background-color: #B7B7CE;
                                            }
                                            </style >";
-                                }else if ($type ==="fairy"){
-                                    echo "<style>
+                                        break;
+                                    case "fairy":
+                                        echo "<style>
                                           .basicInfo  #type\/moves{
                                            background-color: #D685AD ;
                                            } 
@@ -320,6 +356,7 @@ if (isset($_POST['SearchPokemon'])) {
                                            background-color: #D685AD;
                                            }
                                           </style >";
+                                        break;
                                 }
                             } ?></span></p>
                     <p><span><?php
@@ -335,11 +372,11 @@ if (isset($_POST['SearchPokemon'])) {
                             ?></span></p>
                 </div>
                 <div class="moves"><p>Known moves: </p>
-                    <p><span id="moves" ><?php
-                            if (isset($_POST['SearchPokemon'])){
-                                if (count($pokemon['moves'])>1){
-                                    echo implode(", " , $moves);
-                                }else echo $moves;
+                    <p><span id="moves"><?php
+                            if (isset($_POST['SearchPokemon'])) {
+                                if (count($pokemon['moves']) > 1) {
+                                    echo implode(", ", $moves);
+                                } else echo $moves;
                             }
                             ?></span></p>
                 </div>
@@ -425,47 +462,67 @@ if (isset($_POST['SearchPokemon'])) {
         <div id="evolutions">
             <p class="evoTitle">Evolution Line</p>
             <div id="evoSprites">
-                <div class="base"><img src=" <?php if (isset($_POST['SearchPokemon'])) {
+                <div class="base"><img src="
+                <?php if (isset($_POST['SearchPokemon'])) {
                         echo $baseFormSprite;
                     } else
                         echo "images/pokeball.png" ?>" alt="">
-                    <p><span id="base"><?php if (isset($_POST['SearchPokemon'])) {
-                                echo $baseForm;
-                            } ?>
-                    </span></p>
+
+                    <?php if (isset($_POST['SearchPokemon'])) {
+                        echo $baseForm;
+                    } ?>
                 </div>
                 <div class="middle">
-                    <img src=" <?php if (isset($_POST['SearchPokemon'])) {
+                    <img src="<?php if (isset($_POST['SearchPokemon'])) {
                         if ($middleForm) {
                             echo $middleFormSprite;
                         } else
                             echo 'images/pokeball.png';
                     } else
-                        echo 'images/pokeball.png' ?>" alt="">
-                    <p><span id="middleEvo"><?php if (isset($_POST['SearchPokemon'])) {
-                                if ($middleForm) {
-                                    echo $middleForm;
-                                }
+                        echo 'images/pokeball.png';
+                    ?>" alt="">
+                    <?php
+                    if (isset($_POST['SearchPokemon'])) {
+                        if ($middleForm) {
+                            echo $middleForm;
+                            if ($middleForm2) {
+                                $dom = new DOMDocument('1.0', 'utf-8');
+                                $img = $dom->createElement('img');
+                                $src = $dom->createAttribute('src');
+                                $src->value = $middleForm2Sprite;
+                                $img->appendChild($src);
+                                $dom->appendChild($img);
+                                echo $dom->saveXML($img);
+                                echo $middleForm2;
                             }
-                            ?></span></p>
+                        }
+                    } ?>
                 </div>
                 <div class="final">
                     <img src=" <?php if (isset($_POST['SearchPokemon'])) {
                         if ($middleForm) {
                             if ($endForm) {
                                 echo $endFormSprite;
-                            } else
-                                echo 'images/pokeball.png';
+                            }
                         } else echo 'images/pokeball.png';
-                    } else
-                        echo 'images/pokeball.png' ?>" alt="">
-                    <p><span id="finalEvo"><?php if (isset($_POST['SearchPokemon'])) {
-                                if ($middleForm) {
-                                    if ($endForm) {
-                                        echo $endForm;
-                                    } else echo "";
-                                }
-                            } ?></span></p>
+                    } else echo 'images/pokeball.png';
+                    ?>" alt="">
+                    <?php if (isset($_POST['SearchPokemon'])) {
+                        if ($endForm) {
+                            echo $endForm;
+                        }
+                        if ($endForm2) {
+                            $dom = new DOMDocument('1.0', 'utf-8');
+                            $img = $dom->createElement('img');
+                            $src = $dom->createAttribute('src');
+                            $src->value = $endForm2Sprite;
+                            $img->appendChild($src);
+                            $dom->appendChild($img);
+                            echo $dom->saveXML($img);
+                            echo $endForm2;
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
