@@ -615,17 +615,19 @@ if (isset($_POST['SearchPokemon'])) {
                     } else echo 'images/pokeball.png';
                     ?>" alt="">
                     <?php if (isset($_POST['SearchPokemon'])) {
-                        if ($endForm) {
-                            echo $endForm;
-                            if ($endForm2) {
-                                $dom = new DOMDocument('1.0', 'utf-8');
-                                $img = $dom->createElement('img');
-                                $src = $dom->createAttribute('src');
-                                $src->value = $endForm2Sprite;
-                                $img->appendChild($src);
-                                $dom->appendChild($img);
-                                echo $dom->saveXML($img);
-                                echo $endForm2;
+                        if ($middleForm) {
+                            if ($endForm) {
+                                echo $endForm;
+                                if ($endForm2) {
+                                    $dom = new DOMDocument('1.0', 'utf-8');
+                                    $img = $dom->createElement('img');
+                                    $src = $dom->createAttribute('src');
+                                    $src->value = $endForm2Sprite;
+                                    $img->appendChild($src);
+                                    $dom->appendChild($img);
+                                    echo $dom->saveXML($img);
+                                    echo $endForm2;
+                                }
                             }
                         }
                     }
