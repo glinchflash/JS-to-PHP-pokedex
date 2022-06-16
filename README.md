@@ -58,5 +58,5 @@ Another interesting read is https://phptherightway.com. This is not so much docu
     - -[x] wurmple
     - - [x] ditto
     - -[x] smeargle
-    - -[ ] darmanitan
+    - -[x] darmanitan
 ---

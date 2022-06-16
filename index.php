@@ -1,6 +1,9 @@
 <?php
 if (isset($_POST['SearchPokemon'])) {
     $input = $_POST['searchInput'];
+    if ($input === 'darmanitan' || $input === 555){
+        $input = 'darmanitan-standard';
+    }
     $input = strtolower($input);
 
 
@@ -8,7 +11,10 @@ if (isset($_POST['SearchPokemon'])) {
     $pokemonFetch = file_get_contents($url);
     $pokemon = json_decode($pokemonFetch, true);
 
-    $pokeName = $pokemon['name'];
+    if ($input=== "darmanitan-standard"){
+        $pokeName = "darmanitan";
+    }else $pokeName = $pokemon['name'];
+
     $pokeID = $pokemon['id'];
     $frontSprite = $pokemon['sprites']['front_default'];
     $backSprite = $pokemon['sprites']['back_default'];
@@ -75,7 +81,9 @@ if (isset($_POST['SearchPokemon'])) {
     $baseFormSpriteFetch = file_get_contents($baseFormUrl);
     $baseFormFetchReturn = json_decode($baseFormSpriteFetch, true);
     $baseFormSprite = $baseFormFetchReturn['sprites']['other']['home']['front_default'];
-
+    if ($middleForm === "darmanitan"){
+        $middleForm = "darmanitan-standard";
+    }
     if ($middleForm) {
         $middleFormUrl = "https://pokeapi.co/api/v2/pokemon/$middleForm";
         $middleFormSpriteFetch = file_get_contents($middleFormUrl);
@@ -529,6 +537,9 @@ if (isset($_POST['SearchPokemon'])) {
                     ?>" alt="">
                     <?php
                     if (isset($_POST['SearchPokemon'])) {
+                        if ($middleForm === "darmanitan-standard"){
+                            $middleForm = "darmanitan";
+                        }
                         if ($middleForm) {
                             echo $middleForm;
                             if ($middleForm2) {
