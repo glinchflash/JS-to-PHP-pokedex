@@ -56,7 +56,7 @@ Another interesting read is https://phptherightway.com. This is not so much docu
 - -[x] make special evolutions work
     - -[x] eevee
     - -[x] wurmple
-    - - [x] ditto
+    - -[x] ditto
     - -[x] smeargle
     - -[x] darmanitan
 ---
