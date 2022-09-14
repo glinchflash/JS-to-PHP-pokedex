@@ -1,11 +1,12 @@
 # JS-to-PHP-pokedex
-
+Check out the finished pokedex [here](https://golemans-php-pokedex.herokuapp.com/)
 - Repository: `challenge-pokemon-php`
 - Type of Challenge: `Learning`
 - Duration: `2 days`
 - Deployment strategy : NA
 
 - Team challenge : `solo`
+
 
 ## Learning objectives
 - Starting with PHP
