@@ -48,6 +48,7 @@ if (isset($_POST['SearchPokemon'])) {
     $evoChainUrl = $evolution['evolution_chain']['url'];
     $chainFetch = file_get_contents($evoChainUrl);
     $evoLine = json_decode($chainFetch, true);
+
     //fetching the names of the evo line
     $baseForm = $evoLine['chain']['species']['name'];
     if (count($evoLine['chain']['evolves_to']) > 0) {
